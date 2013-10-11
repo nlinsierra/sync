@@ -243,11 +243,25 @@ To unregister a post-hook, just call
 
 	sync:onsync(undefined).
 
+## Set getting modules strategy
+To define, how sync should choosing modules for rescanning, use 
+`get_modules_strategy` parameter.
+### Valid Values For `get_modules_strategy`
+* `include`: rescan only modules from `included_modules` parameter
+* `exclude`: default sync rescan and getting modules strategy
+
 ## Excluding modules from the scanning process
 
 Sometimes you may want to prevent some modules from being scanned by sync. To
 achive this just modify `excluded_modules` configuration paramter in the
 [node's config file](http://www.erlang.org/doc/man/config.html).
+
+## Setting modules for the scanning process
+
+Sometimes you need to recompile only few modules from the project. To
+achive this just modify `included_modules` configuration paramter in the
+[node's config file](http://www.erlang.org/doc/man/config.html).
+
 
 ## Moving Application Location
 
@@ -274,28 +288,6 @@ config:
   recompiling only if the original location changes.
 
 * `ignore`: If a file is not a descendant, sync will completely ignore it.
-
-## A note about Nitrogen
-
-The `{sync_mode, nitrogen}` option is no longer necessary for users of the
-[Nitrogen Web Framework](http://nitrogenproject.com) and will be ignored. Sync
-works with Nitrogen without that option.
-
-## Sample Configuration File
-
-Please note that sync loads with the following defaults:
-
-```erlang
-[
-	{sync, [
-		{growl, all},
-		{log, all},
-		{non_descendants, fix},
-		{executable, auto},
-		{excluded_modules, []}
-	]}
-].
-```
 
 You can view a full sample configuration file
 ([sync.sample.config](https://github.com/rustyio/sync/blob/master/sync.sample.config))
