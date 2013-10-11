@@ -127,7 +127,7 @@ handle_cast(discover_modules, State) ->
     %% Get a list of all loaded non-system modules.
     Modules = (erlang:loaded() -- sync_utils:get_system_modules()),
     FilteredModules = case application:get_env(sync, get_modules_strategy) of
-        include -> set_modules_to_scan();
+        {ok, include} -> set_modules_to_scan();
         _ -> filter_modules_to_scan(Modules)  
     end,    
 
